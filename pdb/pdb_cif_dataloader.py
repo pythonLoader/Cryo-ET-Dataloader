@@ -212,7 +212,7 @@ def download_rcsb_metadata(accession_list=None):
             - download_links: downloads protein profile links from RCSB, PDBe, PDBj sites if True (default=False)
             - download_metadata: downloads protein metadata from RCSB site if True (default=False)
 """
-def main(accession_list=None, output_dir='.', download_pdb=True, download_cif=True, debug_on=False, download_links=False, download_metadata=False):
+def pdb_stub(accession_list=None, output_dir='.', download_pdb=True, download_cif=True, debug_on=False, download_links=False, download_metadata=False):
     if accession_list is None:
         accession_list = []
 
@@ -299,5 +299,5 @@ def main(accession_list=None, output_dir='.', download_pdb=True, download_cif=Tr
         download_rcsb_metadata(accession_list).to_excel("{}/proteins-metadata.xlsx".format(output_dir), index=False)
 
 
-if __name__ == '__main__':
-    main(accession_list=['101d', '2cme', '1jdn', '6vxx', 'lmao'])  # 'lmao' is not a real protein, just for sanity checking
+# if __name__ == '__main__':
+#     main(accession_list=['101d', '2cme', '1jdn', '6vxx', 'lmao'])  # 'lmao' is not a real protein, just for sanity checking
