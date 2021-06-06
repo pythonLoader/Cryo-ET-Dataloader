@@ -104,7 +104,7 @@ def get_header_data_String_format(structure_title, fittedpdbs, depositiondate, h
   header_content += "ISSN: {}\n".format(issn)
   return header_content
 
-def download_emdb(accession_id, output_directory, map=True, header=True, image=True, debug =True ):
+def download_emdb(accession_id, output_directory, map=True, header=True, image=True, debug=True ):
   URL_pdbj="https://ftp.pdbj.org/pub/emdb/structures/EMD-{}/".format(accession_id)
   response = requests.get(URL_pdbj)
   #
@@ -194,10 +194,15 @@ def download_emdb(accession_id, output_directory, map=True, header=True, image=T
             os.remove(output_directory+"/extracted_folder")
           else:
             print("Not found in EM Data Resource or EM Resource of PDBJ or PDBE")
-#example
-def main(accession_id):
-	output_directory="EMD-{}".format(accession_id)
-	download_emdb(accession_id, output_directory)
 
-if __name__ == '__main__':
-	main("11082")
+def emdb_stub(accession_list, output_directory, map_=True, header=True, image=True, debug=True):
+  for entry in accession_list:
+    download_emdb(entry,output_directory,map_,header,image,debug)
+
+#example
+# def main(accession_id):
+# 	output_directory="EMD-{}".format(accession_id)
+# 	download_emdb(accession_id, output_directory)
+
+# if __name__ == '__main__':
+# 	main("11082")

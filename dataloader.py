@@ -2,11 +2,15 @@ import subprocess
 import argparse
 from pdb.pdb_cif_dataloader import pdb_stub
 from empiar.empiar_downloader import empiar_stub
+from emdb.emdb_downloader import emdb_stub
 import shutil,os,sys
 
 def validate_arguments(parser,args):
+	
 	if(args.singleId and args.batchFileName):
 		parser.error("Cannot have both single accession and batch list together")
+	if not args.singleId and not args.batchFileName:
+		parser.error("Please input atleast one entry/accession or the batch entry/accession file")
 	return args
 
 def get_accession_list(args):
@@ -22,8 +26,6 @@ def get_accession_list(args):
 	return accession_list
 
 def handle_pdb_download(args,accession_list):
-	
-
 	if(args.links or args.metadata_pdb or args.ciff or args.pdb):
 		pdb_stub(accession_list,args.output,args.pdb,args.ciff,False,args.links,args.metadata_pdb)
 	else:
@@ -32,6 +34,12 @@ def handle_pdb_download(args,accession_list):
 
 def handle_empiar_download(args,accession_list):
 	empiar_stub(accession_list,args.output)
+
+def handle_emdb_download(args,accession_list):
+	if(args.header or args.image or args.map):
+		emdb_stub(accession_list, args.output, args.map, args.header, args.image)
+	else:
+		emdb_stub(accession_list,args.output)
 
 def parseArguments():
     parser = argparse.ArgumentParser(prog='dataloader', description='Data Downloader for cryo-EM/ cryo-ET and PDB files')
@@ -111,6 +119,8 @@ def parseArguments():
     	handle_pdb_download(args,accession_list)
     elif(args.input_format == "empiar"):
     	handle_empiar_download(args,accession_list)
+    elif(args.input_format == "emdb"):
+    	handle_emdb_download(args,accession_list)
 	
 	
 
