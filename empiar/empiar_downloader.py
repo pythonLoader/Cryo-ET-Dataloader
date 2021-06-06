@@ -31,6 +31,7 @@ def download(entry,output_direc):
 
     '''
     #Create URL Link
+    print("Starting Download")
     url = "empiar.pdbj.org::empiar/archive/"+str(entry) 
     output_ = output_direc +"/"+ str(entry)+"/"
     
