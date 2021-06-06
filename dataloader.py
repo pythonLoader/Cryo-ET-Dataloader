@@ -11,6 +11,7 @@ def validate_arguments(parser,args):
 		parser.error("Cannot have both single accession and batch list together")
 	if not args.singleId and not args.batchFileName:
 		parser.error("Please input atleast one entry/accession or the batch entry/accession file")
+	args.input_format = args.input_format.lower()
 	return args
 
 def get_accession_list(args):
@@ -33,6 +34,7 @@ def handle_pdb_download(args,accession_list):
 
 
 def handle_empiar_download(args,accession_list):
+	
 	empiar_stub(accession_list,args.output)
 
 def handle_emdb_download(args,accession_list):
@@ -126,7 +128,8 @@ def parseArguments():
 
 
 def main():
-    arguments = parseArguments()
+	arguments = parseArguments()
 
 if __name__ == "__main__":
-    main()
+	
+	main()
