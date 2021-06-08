@@ -34,7 +34,8 @@ def download(entry,output_direc):
     print("Starting Download")
     url = "empiar.pdbj.org::empiar/archive/"+str(entry) 
     output_ = output_direc +"/"+ str(entry)+"/"
-    
+
+    #P flag added, now it will support interrupted download
     for path in execute(["rsync", "-avz", "-P",url,output_]):
         print(path, end="")
 
@@ -54,6 +55,8 @@ def converttif2mrc(direc):
     # lst = 
     # for filename in glob.iglob(direc+"**/*.tif",recursive=True):
     #     print(filename)
+
+    print("Starting to convert tif2mrc using IMOD")
     for folder, subs, files in os.walk(direc):
         
         for file in files:
