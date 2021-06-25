@@ -43,10 +43,10 @@ def parseArguments():
     	metavar='direc')
 
     args = parser.parse_args()
-    # print(args)
+    print(args)
     # args = validate_arguments(parser,args)
     
-    converttif2mrc(args.direc)
+    converttif2mrc(args.input_directory)
 
 def main():
 	arguments = parseArguments()
